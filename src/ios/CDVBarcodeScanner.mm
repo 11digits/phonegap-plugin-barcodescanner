@@ -357,7 +357,21 @@ parentViewController:(UIViewController*)parentViewController
 }
 
 //--------------------------------------------------------------------------
+/*- (void)openDialog {
+    [self.parentViewController
+     presentViewController:self.viewController
+     animated:self.isTransitionAnimated completion:nil
+     ];
+}*/
 - (void)openDialog {
+    // Set modal presentation style to full screen
+    self.viewController.modalPresentationStyle = UIModalPresentationFullScreen;
+
+    // Prevent dismissal by swiping down or tapping outside (iOS 13 and later)
+    if (@available(iOS 13.0, *)) {
+        self.viewController.modalInPresentation = YES;
+    }
+
     [self.parentViewController
      presentViewController:self.viewController
      animated:self.isTransitionAnimated completion:nil
